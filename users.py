@@ -34,7 +34,7 @@ class Admin(User):
 class Restaurent:
     def __init__(self, name):
         self.name = name
-        self.employees = [] # Database
+        self.employees = [] # Employees Database
 
     def add_employee(self, employee):
         self.employees.append(employee)
@@ -43,6 +43,15 @@ class Restaurent:
         print("Employee List: ")
         for emp in self.employees:
             print(emp.name, emp.phone, emp.email, emp.address)
+
+class Menu:
+    def __init__(self):
+        self.items = [] # Items Database
+
+    def add_menu_item(self, item):
+        self.items.append(item)
+
+    
 
 
 ad = Admin('Shahidul', 23423423, 'shahidul@gmail.com', 'Dhaka')
