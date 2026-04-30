@@ -57,6 +57,14 @@ class Menu:
                 return item
         return None
 
+    def remove_item(self, item_name):
+        item = self.find_item(item_name)
+
+        if item:
+            self.items.remove(item)
+            print(f'{item_name} deleted')
+        else:
+            print(f'{item_name} not found')
 
 ad = Admin('Shahidul', 23423423, 'shahidul@gmail.com', 'Dhaka')
 ad.add_employee('Sagor', 234234, 's@gmail.com', 'Khulna', 32, 'chef', 12000)
