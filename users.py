@@ -23,17 +23,27 @@ class Employee(User):
 class Admin(User):
     def __init__(self, name, phone, email, address):
         super().__init__(name, phone, email, address)
+
+    def add_employee(self, restaurent, employee):
+        restaurent.add_employee(employee)
+
+    def view_employee(self, restaurent):
+        restaurent.view_employee()
+
+
+class Restaurent:
+    def __init__(self, name):
+        self.name = name
         self.employees = [] # Database
 
-    def add_employee(self, name, phone, email, address, age, designation, salary):
-        employee = Employee(name, phone, email, address, age, designation, salary)
+    def add_employee(self, employee):
         self.employees.append(employee)
-        print(f"{employee.name} is added as employee!!")
 
     def view_employee(self):
         print("Employee List: ")
         for emp in self.employees:
             print(emp.name, emp.phone, emp.email, emp.address)
+
 
 ad = Admin('Shahidul', 23423423, 'shahidul@gmail.com', 'Dhaka')
 ad.add_employee('Sagor', 234234, 's@gmail.com', 'Khulna', 32, 'chef', 12000)
