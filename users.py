@@ -10,16 +10,18 @@ class User(ABC):
 class Customer(User):
     def __init__(self, name, phone, email, address):
         super().__init__(name, phone, email, address)
-        self.cart = None
+        self.cart = Order()
     
     def view_menu(self, restaurent):
         restaurent.menu.show_menu()
 
-    def add_to_cart(self, restaurent, item_name):
+    def add_to_cart(self, restaurent, item_name, quantity):
         item = restaurent.menu.find_item(item_name)
 
         if item:
-            pass
+            item.quantity = quantity
+            self.cart.add_item(item)
+            print(F"{item.name} added in cart")
         else:
             print("Item not found")
 
@@ -138,7 +140,13 @@ class Food_item:
 # ad.view_employee()
 
 
-mn = Menu()
+
+restora = Restaurent('mamar restora')
 item = Food_item("Pizza", 12.45, 10)
-mn.add_menu_item(item)
-mn.show_menu()
+item2 = Food_item("Burger", 10, 30)
+admin = Admin("Halim", "halim@gmail.com", 234234, "Dhaka")
+admin.add_new_item(restora, item)
+admin.add_new_item(restora, item2)
+
+customer1 = Customer('Munim', 'munim@gmail.com', 123213, 'Dhaka')
+customer1.view_menu(restora)
