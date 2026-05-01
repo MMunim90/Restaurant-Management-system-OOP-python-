@@ -29,16 +29,15 @@ class Customer(User):
         else:
             print("Item not found")
 
-    @property
     def view_cart(self):
         print("******Cart******")
-        print("Name\tPrice\tQuentity")
+        print("Name\tPrice\tQuantity")
         for item, quantity in self.cart.items.items():
             print(f"{item.name}\t{item.price}\t{quantity}")
-        print(f"Total Price : {self.cart.total_price}")
+        print(f"Total Price : {self.cart.total_price()}")
 
     def pay_bill(self):
-        print(f"Total {self.cart.total_price} paid successfully")
+        print(f"Total {self.cart.total_price()} paid successfully")
         self.cart.clear()
 
 class Employee(User):

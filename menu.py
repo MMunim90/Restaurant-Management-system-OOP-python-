@@ -16,7 +16,6 @@ class Menu:
 
         if item:
             self.items.remove(item)
-            print(f'{item_name} deleted')
         else:
             print(f'{item_name} not found')
 

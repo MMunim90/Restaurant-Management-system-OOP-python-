@@ -1,5 +1,6 @@
 from food_item import Food_item
 from users import Admin
+from users import Employee
 
 def admin_menu(restora):
     name = input('Enter Your Name: ')
@@ -30,7 +31,9 @@ def admin_menu(restora):
             salary = int(input("Enter Employee salary: "))
             address = input("Enter Employee Address: ")
 
-            admin.add_employee(name, phone, email, age, designation, salary, address)
+            employee = Employee(name, phone, email, age, designation, salary, address)
+
+            admin.add_employee(restora, employee)
         elif choice == 2:
             admin.view_employee(restora)
         elif choice == 3:
@@ -38,7 +41,7 @@ def admin_menu(restora):
             delete = input(f"Type \'DELETE\' to remove {employee_name} from employee list: ")
             if delete == 'DELETE':
                 admin.remove_employee(restora, employee_name)
-                print(f"{employee_name} was deleted from employee list")
+                print(f"{employee_name} was removed from employee list")
             else:
                 print("Character did\'nt match!")
         elif choice == 4:

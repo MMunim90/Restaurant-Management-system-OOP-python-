@@ -11,8 +11,9 @@ class Restaurent:
 
     def view_employee(self):
         print("Employee List: ")
+        print("Name\tEmail\tPhone\tAge\tAddress\tDesignation\tSalary")
         for emp in self.employees:
-            print(emp.name, emp.phone, emp.email, emp.address)
+            print(f"{emp.name}\t{emp.email}\t{emp.phone}\t{emp.age}\t{emp.address}\t{emp.designation}\t{emp.salary}")
 
     def find_employee(self, employee_name):
         for emp in self.employees:
@@ -25,6 +26,5 @@ class Restaurent:
 
         if emp:
             self.employees.remove(emp)
-            print(f'{employee_name} removed from employee list')
         else:
             print(f'{employee_name} not found in employee list')
