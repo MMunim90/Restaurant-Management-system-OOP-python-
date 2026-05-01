@@ -1,4 +1,5 @@
 from abc import ABC
+from orders import Order
 
 class User(ABC):
     def __init__(self, name, phone, email, address):
@@ -28,34 +29,17 @@ class Customer(User):
         else:
             print("Item not found")
 
+    @property
     def view_cart(self):
         print("******Cart******")
         print("Name\tPrice\tQuentity")
         for item, quantity in self.cart.items.items():
             print(f"{item.name}\t{item.price}\t{quantity}")
-        print(f"Total Price : {self.cart.total_price()}")
+        print(f"Total Price : {self.cart.total_price}")
 
-
-class Order:
-    def __init__(self):
-        self.items = {}
-
-    def add_item(self, item):
-        if item in self.items:
-            self.items[item] += item.quantity
-        else:
-            self.items[item] = item.quantity
-
-    def remove(self, item):
-        if item in self.items:
-            del self.items[item]
-
-    def total_price(self):
-        return sum(item.price * quantity for item, quantity in self.items.items())
-    
-    def clear(self):
-        self.items = {}
-
+    def pay_bill(self):
+        print(f"Total {self.cart.total_price} paid successfully")
+        self.cart.clear()
 
 class Employee(User):
     def __init__(self, name, phone, email, address,  age, designation, salary):
@@ -63,10 +47,6 @@ class Employee(User):
         self.age = age
         self.designation = designation
         self.salary = salary
-
-
-# emp = Employee('Munim', 'munim@gmail.com', 123434, 'Dhaka', 23, 'chef', 12000)
-# print(emp.name)
 
 
 class Admin(User):
@@ -79,83 +59,14 @@ class Admin(User):
     def view_employee(self, restaurent):
         restaurent.view_employee()
 
+    def remove_employee(self, restaurent, employee):
+        restaurent.remove_employee(employee)
+
     def add_new_item(self, restaurent, item):
         restaurent.menu.add_menu_item(item)
 
+    def view_item(self, restaurent):
+        restaurent.menu.show_menu()
+
     def remove_item(self, restaurent, item):
         restaurent.menu.remove_item(item)
-
-
-class Restaurent:
-    def __init__(self, name):
-        self.name = name
-        self.employees = [] # Employees Database
-        self.menu = Menu()
-
-    def add_employee(self, employee):
-        self.employees.append(employee)
-
-    def view_employee(self):
-        print("Employee List: ")
-        for emp in self.employees:
-            print(emp.name, emp.phone, emp.email, emp.address)
-
-class Menu:
-    def __init__(self):
-        self.items = [] # Items Database
-
-    def add_menu_item(self, item):
-        self.items.append(item)
-
-    def find_item(self, item_name):
-        for item in self.items:
-            if item.name.lower() == item_name.lower():
-                return item
-        return None
-
-    def remove_item(self, item_name):
-        item = self.find_item(item_name)
-
-        if item:
-            self.items.remove(item)
-            print(f'{item_name} deleted')
-        else:
-            print(f'{item_name} not found')
-
-    def show_menu(self):
-        print("******Menu******")
-        print("Name\tPrice\tQuantity")
-        for item in self.items:
-            print(f'{item.name}\t{item.price}\t{item.quantity}')
-
-
-class Food_item:
-    def __init__(self, name, price, quantity):
-        self.name = name
-        self.price = price
-        self.quantity = quantity
-
-        
-
-# ad = Admin('Shahidul', 23423423, 'shahidul@gmail.com', 'Dhaka')
-# ad.add_employee('Sagor', 234234, 's@gmail.com', 'Khulna', 32, 'chef', 12000)
-
-# ad.view_employee()
-
-
-
-restora = Restaurent('mamar restora')
-item = Food_item("Pizza", 12.45, 10)
-item2 = Food_item("Burger", 10, 30)
-admin = Admin("Halim", "halim@gmail.com", 234234, "Dhaka")
-admin.add_new_item(restora, item)
-admin.add_new_item(restora, item2)
-
-customer1 = Customer('Munim', 'munim@gmail.com', 123213, 'Dhaka')
-customer1.view_menu(restora)
-
-item_name = input("Enter item name: ")
-item_quantity = int(input("Enter item quantity: "))
-
-customer1.add_to_cart(restora, item_name, item_quantity)
-customer1.view_cart()
