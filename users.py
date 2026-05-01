@@ -19,9 +19,12 @@ class Customer(User):
         item = restaurent.menu.find_item(item_name)
 
         if item:
-            item.quantity = quantity
-            self.cart.add_item(item)
-            print(F"{item.name} added in cart")
+            if quantity > item.quantity:
+                print("Item quantity exceeded!!!")
+            else:
+                item.quantity = quantity
+                self.cart.add_item(item)
+                print(F"{item.name} added in cart")
         else:
             print("Item not found")
 
@@ -30,7 +33,7 @@ class Customer(User):
         print("Name\tPrice\tQuentity")
         for item, quantity in self.cart.items.items():
             print(f"{item.name}\t{item.price}\t{quantity}")
-        print("Total Price : {self.cart.total_price}")
+        print(f"Total Price : {self.cart.total_price()}")
 
 
 class Order:
@@ -150,3 +153,9 @@ admin.add_new_item(restora, item2)
 
 customer1 = Customer('Munim', 'munim@gmail.com', 123213, 'Dhaka')
 customer1.view_menu(restora)
+
+item_name = input("Enter item name: ")
+item_quantity = int(input("Enter item quantity: "))
+
+customer1.add_to_cart(restora, item_name, item_quantity)
+customer1.view_cart()
