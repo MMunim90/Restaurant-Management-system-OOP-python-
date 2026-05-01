@@ -3,6 +3,8 @@ from customer_menu import customer_menu
 from admin_menu import admin_menu
 
 restora = Restaurent("Sultan\'s Dine")
+customer_menu(restora)
+admin_menu(restora)
 
 while True:
     print("*********Welcome**********")

@@ -1,7 +1,6 @@
 from users import Customer
-from main import restora
 
-def customer_menu():
+def customer_menu(restora):
     name = input('Enter Your Name: ')
     email = input('Enter Your Email: ')
     phone = int(input('Enter Your Phone: '))

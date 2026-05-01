@@ -1,8 +1,7 @@
 from food_item import Food_item
 from users import Admin
-from main import restora
 
-def admin_menu():
+def admin_menu(restora):
     name = input('Enter Your Name: ')
     email = input('Enter Your Email: ')
     phone = int(input('Enter Your Phone: '))
